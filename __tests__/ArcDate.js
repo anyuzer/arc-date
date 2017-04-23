@@ -7,10 +7,6 @@ describe('ArcDate',()=>{
         expect(TestDate.format('M jS, Y - h:i A')).toBe('Aug 25th, 1981 - 12:00 AM');
     });
 
-    it('Should accept a formatting string and return the formatted date as expected in local time',()=>{
-        expect(TestDate.formatLocal('M jS, Y - h:i A')).toBe('Aug 24th, 1981 - 05:00 PM');
-    });
-
     it('Should accept a new date in local time, and return the correct format in local time',()=>{
         let TestDate = new ArcDate(1981,7,25);
         expect(TestDate.formatLocal('M jS, Y - h:i A')).toBe('Aug 25th, 1981 - 12:00 AM');

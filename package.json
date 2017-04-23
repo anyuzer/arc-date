@@ -1,0 +1,29 @@
+{
+  "name": "arc-date",
+  "version": "1.0.0",
+  "description": "Date convenience subclass",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anyuzer/arc-date.git"
+  },
+  "keywords": [
+    "Date"
+  ],
+  "author": "Ian Reid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anyuzer/arc-date/issues"
+  },
+  "homepage": "https://github.com/anyuzer/arc-date#readme",
+  "devDependencies": {
+    "jest": "^19.0.2"
+  },
+  "dependencies": {
+    "arc-is": "^1.0.5"
+  }
+}

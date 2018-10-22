@@ -7,6 +7,43 @@ describe('ArcDate',()=>{
         expect(TestDate.format('M jS, Y - h:i A')).toBe('Aug 25th, 1981 - 12:00 AM');
     });
 
+    it('Should be able to accurately format a date for pacific or eastern timezones in daylight or standard time', () => {
+        //Pacific test
+        let TestDate = new ArcDate(Date.UTC(2018,2,11,9,59,59));
+        expect(TestDate.format('M jS, Y - h:i A', 'America/Vancouver')).toBe('Mar 11th, 2018 - 01:59 AM');
+        TestDate = new ArcDate(Date.UTC(2018,2,11,10));
+        expect(TestDate.format('M jS, Y - h:i A', 'America/Vancouver')).toBe('Mar 11th, 2018 - 03:00 AM');
+
+        //Eastern test
+        TestDate = new ArcDate(Date.UTC(2018,2,11,6,59,59));
+        expect(TestDate.format('M jS, Y - h:i A', 'America/Toronto')).toBe('Mar 11th, 2018 - 01:59 AM');
+        TestDate = new ArcDate(Date.UTC(2018,2,11,7));
+        expect(TestDate.format('M jS, Y - h:i A', 'America/Toronto')).toBe('Mar 11th, 2018 - 03:00 AM');
+
+        //Pacific test
+        TestDate = new ArcDate(Date.UTC(2018,10,4,8,59,59));
+        expect(TestDate.format('M jS, Y - h:i A', 'America/Vancouver')).toBe('Nov 4th, 2018 - 01:59 AM');
+        TestDate = new ArcDate(Date.UTC(2018,10,4,9));
+        expect(TestDate.format('M jS, Y - h:i A', 'America/Vancouver')).toBe('Nov 4th, 2018 - 01:00 AM');
+
+        //Pacific test
+        TestDate = new ArcDate(Date.UTC(2018,10,4,5,59,59));
+        expect(TestDate.format('M jS, Y - h:i A', 'America/Toronto')).toBe('Nov 4th, 2018 - 01:59 AM');
+        TestDate = new ArcDate(Date.UTC(2018,10,4,6));
+        expect(TestDate.format('M jS, Y - h:i A', 'America/Toronto')).toBe('Nov 4th, 2018 - 01:00 AM');
+    });
+
+    it('should handle first sunday of november being the 1st for DST', () => {
+        TestDate = new ArcDate(Date.UTC(2015,10,1,9));
+        expect(TestDate.format('M jS, Y - h:i A', 'America/Vancouver')).toBe('Nov 1st, 2015 - 01:00 AM');
+    });
+
+    it('Should accept a non DST timezone, and accurately format it', () => {
+        //Pacific test
+        let TestDate = new ArcDate(Date.UTC(1981,7,25));
+        expect(TestDate.format('M jS, Y - h:i A', 'Africa/Tripoli')).toBe('Aug 25th, 1981 - 02:00 AM');
+    });
+
     it('Should accept a new date in local time, and return the correct format in local time',()=>{
         let TestDate = new ArcDate(1981,7,25);
         expect(TestDate.formatLocal('M jS, Y - h:i A')).toBe('Aug 25th, 1981 - 12:00 AM');

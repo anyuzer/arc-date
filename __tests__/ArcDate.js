@@ -44,6 +44,13 @@ describe('ArcDate',()=>{
         expect(TestDate.format('M jS, Y - h:i A', 'Africa/Tripoli')).toBe('Aug 25th, 1981 - 02:00 AM');
     });
 
+    it('Should accept a timezone string, and then automatically return an adjusted response when format is called', () => {
+        TestDate = new ArcDate(Date.UTC(2018,10,4,5,59,59));
+        expect(TestDate.setTZ('America/Toronto').format('M jS, Y - h:i A')).toBe('Nov 4th, 2018 - 01:59 AM');
+        TestDate = new ArcDate(Date.UTC(2018,10,4,6));
+        expect(TestDate.setTZ('America/Toronto').format('M jS, Y - h:i A')).toBe('Nov 4th, 2018 - 01:00 AM');
+    });
+
     it('Should accept a new date in local time, and return the correct format in local time',()=>{
         let TestDate = new ArcDate(1981,7,25);
         expect(TestDate.formatLocal('M jS, Y - h:i A')).toBe('Aug 25th, 1981 - 12:00 AM');

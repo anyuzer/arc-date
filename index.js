@@ -54,6 +54,7 @@ const hour = 60*60*1000;
 
 class ArcDate extends Date {
     format(_formatString, _timezone){
+        _timezone = _timezone || this.tzString;
         let date = new Date(this.getTime());
         if(timezones[_timezone]){
             const [standard, daylight, zone] = timezones[_timezone];
@@ -88,6 +89,11 @@ class ArcDate extends Date {
             }
         }
         return formattedDate;
+    }
+
+    setTZ(_tzString){
+        this.tzString = _tzString;
+        return this;
     }
 
     toString(){

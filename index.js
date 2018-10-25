@@ -96,8 +96,45 @@ class ArcDate extends Date {
         return this;
     }
 
+    getTimezoneOffset() {
+        if(!this.tzString){
+            return super.getTimezoneOffset();
+        }
+        const [standard, daylight, zone] = timezones[this.tzString];
+        console.log(isDaylight(this, zone, standard, daylight), standard, daylight);
+        return (~(isDaylight(this, zone, standard, daylight) ? daylight*60 : standard*60)+1);
+    }
+
     toString(){
         return '[object '+this.constructor.name+']';
+    }
+
+    static target(_tzString, _UTCDate) {
+        const localTargets = [_UTCDate.getUTCFullYear(), _UTCDate.getUTCMonth()+1, _UTCDate.getUTCDate(), _UTCDate.getUTCHours()];
+        const startTime = _UTCDate.getTime()-(13*60*60*1000); //Remove 13 hours off of our time
+
+        let targetDate = new ArcDate(startTime);
+        targetDate.setTZ(_tzString);
+
+        const checkTarget = (_targets, _ArcDate) => {
+            if(Number(_ArcDate.format('Y')) !== _targets[0]){ return false; }
+            if(Number(_ArcDate.format('m')) !== _targets[1]){ return false; }
+            if(Number(_ArcDate.format('d')) !== _targets[2]){ return false; }
+            if(Number(_ArcDate.format('H')) !== _targets[3]){ return false; }
+            return true;
+        };
+
+        let choke = 0;
+        while(!checkTarget(localTargets, targetDate)){
+            targetDate = new ArcDate(targetDate.getTime()+(60*60*1000)); //Increment by an hour
+            targetDate.setTZ(_tzString);
+            choke++;
+            if(choke > 50){
+                throw new Error(`Something went horribly wrong with the target function. Your tz target was ${_tzString} and your target was ${_UTCDate.toUTCString()}. Please report this on github so we can fix this.`)
+                break;
+            }
+        }
+        return targetDate;
     }
 
     static wrap(_Date){

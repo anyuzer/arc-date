@@ -67,6 +67,29 @@ describe('ArcDate',()=>{
         expect(ArcDate.wrap(NewDate)).toBe(NewDate);
     });
 
+    it('should return a correct timezone offset in minutes according to the tzString set or if not set, according to local time', () => {
+        let TestDate = new ArcDate(1981,7,25);
+        TestDate.setTZ('America/Toronto');
+        expect(TestDate.getTimezoneOffset()).toBe(240);
+
+        TestDate = new ArcDate(1981,1,1);
+        TestDate.setTZ('America/Toronto');
+        expect(TestDate.getTimezoneOffset()).toBe(300);
+
+        TestDate = new ArcDate(1981,1,1);
+        expect(TestDate.getTimezoneOffset()).toBe(480);
+    });
+
+    it('should return a date that matches the target constructor and timezone', () => {
+        const TargetDate = new ArcDate;
+        TargetDate.setUTCHours(9);
+        TargetDate.setUTCMinutes(30);
+        let TestDate = ArcDate.target('America/Toronto', TargetDate);
+
+        expect(TestDate.format('Y-m-d h:i A')).toBe(TargetDate.format('Y-m-d h:i A'));
+        expect(TestDate.getTime()).not.toBe(TargetDate.getTime());
+    });
+
     it('should throw a TypeError if wrapping a non date',()=>{
         expect(()=>{
             ArcDate.wrap('FAIL');

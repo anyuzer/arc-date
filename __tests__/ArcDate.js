@@ -77,7 +77,7 @@ describe('ArcDate',()=>{
         expect(TestDate.getTimezoneOffset()).toBe(300);
 
         TestDate = new ArcDate(1981,1,1);
-        expect(TestDate.getTimezoneOffset()).toBe(480);
+        expect(TestDate.getTimezoneOffset()).toBe((new Date(1981, 1, 1)).getTimezoneOffset());
     });
 
     it('should return a date that matches the target constructor and timezone', () => {

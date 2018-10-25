@@ -1,6 +1,6 @@
 const is = require('arc-is')
 const formatFunctions = require('./functions');
-const timezones = require('./timezones');
+const timezones = require('./timezones.json');
 
 const isDaylight = (_targetDate, _zone, _standardOffset, _daylightOffset) => {
     //Not relevant, no actual DST change

@@ -81,9 +81,7 @@ describe('ArcDate',()=>{
     });
 
     it('should return a date that matches the target constructor and timezone', () => {
-        const TargetDate = new ArcDate;
-        TargetDate.setUTCHours(9);
-        TargetDate.setUTCMinutes(30);
+        const TargetDate = (new ArcDate).setUTCHours(9, 30);
         let TestDate = ArcDate.target('America/Toronto', TargetDate);
 
         expect(TestDate.format('Y-m-d h:i A')).toBe(TargetDate.format('Y-m-d h:i A'));

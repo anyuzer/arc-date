@@ -96,13 +96,88 @@ class ArcDate extends Date {
         return this;
     }
 
+    // Overrides
     getTimezoneOffset() {
         if(!this.tzString){
             return super.getTimezoneOffset();
         }
         const [standard, daylight, zone] = timezones[this.tzString];
-        console.log(isDaylight(this, zone, standard, daylight), standard, daylight);
         return (~(isDaylight(this, zone, standard, daylight) ? daylight*60 : standard*60)+1);
+    }
+
+    setDate(_dayValue){
+        super.setDate(_dayValue);
+        return this;
+    }
+
+    setFullYear(_yearValue, _monthValue, _dateValue){
+        super.setFullYear(_yearValue, _monthValue || '', _dateValue || '');
+        return this;
+    }
+
+    setHours(_hoursValue, _minutesValue, _secondsValue, _msValue){
+        super.setHours(_hoursValue, _minutesValue || '', _secondsValue || '', _msValue || '');
+        return this;
+    }
+
+    setMilliseconds(_msValue){
+        super.setMilliseconds(_msValue);
+        return this;
+    }
+
+    setMinutes(_minutesValue, _secondsValue, _msValue){
+        super.setMinutes(_minutesValue, _secondsValue || '', _msValue || '');
+        return this;
+    }
+
+    setMonth(_monthValue, _dayValue){
+        super.setMonth(_monthValue, _dayValue || '');
+        return this;
+    }
+
+    setSeconds(_secondsValue, _msValue){
+        super.setSeconds(_secondsValue, _msValue || '');
+        return this;
+    }
+
+    setTime(_timeValue){
+        super.setTime(_timeValue);
+        return this;
+    }
+
+    setUTCDate(_dayValue){
+        super.setUTCDate(_dayValue);
+        return this;
+    }
+
+    setUTCFullYear(_yearValue, _monthValue, _dateValue){
+        super.setUTCFullYear(_yearValue, _monthValue || '', _dateValue || '');
+        return this;
+    }
+
+    setUTCHours(_hoursValue, _minutesValue, _secondsValue, _msValue){
+        super.setUTCHours(_hoursValue, _minutesValue || '', _secondsValue || '', _msValue || '');
+        return this;
+    }
+
+    setUTCMilliseconds(_msValue){
+        super.setUTCMilliseconds(_msValue);
+        return this;
+    }
+
+    setUTCMinutes(_minutesValue, _secondsValue, _msValue){
+        super.setUTCMinutes(_minutesValue, _secondsValue || '', _msValue || '');
+        return this;
+    }
+
+    setUTCMonth(_monthValue, _dayValue){
+        super.setMonth(_monthValue, _dayValue || '');
+        return this;
+    }
+
+    setUTCSeconds(_secondsValue, _msValue){
+        super.setSeconds(_secondsValue, _msValue || '');
+        return this;
     }
 
     toString(){
@@ -151,3 +226,20 @@ class ArcDate extends Date {
 }
 
 module.exports = ArcDate;
+
+// Date.prototype.setDate()
+// Date.prototype.setFullYear()
+// Date.prototype.setHours()
+// Date.prototype.setMilliseconds()
+// Date.prototype.setMinutes()
+// Date.prototype.setMonth()
+// Date.prototype.setSeconds()
+// Date.prototype.setTime()
+// Date.prototype.setUTCDate()
+// Date.prototype.setUTCFullYear()
+// Date.prototype.setUTCHours()
+// Date.prototype.setUTCMilliseconds()
+// Date.prototype.setUTCMinutes()
+// Date.prototype.setUTCMonth()
+// Date.prototype.setUTCSeconds()
+// Date.prototype.setYear()

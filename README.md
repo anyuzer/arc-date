@@ -7,12 +7,15 @@ $ npm install arc-date --save
 ```
 
 ## Features
-* automatic adjustment for specified timezones
-* format()
-* formatLocal()
+* Handles DST when using specific timezones
+* Create formatted strings for a specific timezone
+* Create formatted strings for local time
+* Create formatted strings for UTC
+* Create a new date object targeting a time in a specific timezone, taking DST into account
+* Setters return `this` to enable chaining
 
 ## Basic Usage
-The following example creates a new ArcDate, and utilizes formatLocal to return a formatted string
+The following example creates a new ArcDate, and utilizes formatting functions to return a formatted string
 
 ```js
 const ArcDate = require('arc-date');
@@ -29,6 +32,21 @@ TestDate.formatLocal('M jS, Y - h:i A'); //returns 'Aug 24th, 1981 - 05:00 PM'
 //Or we can specify what timezone we want to format the time in
 TestDate.format('M jS, Y - h:i A', 'America/Toronto'); //returns 'Aug 24th, 1981 - 08:00 PM'
 
+//Or we can set a timezone internally, and have format auto format in that time
+TestDate.setTZ('America/Toronto');
+TestDate.format('M jS, Y - h:i A'); //returns 'Aug 24th, 1981 - 08:00 PM'
+```
+
+## Advanced Usage
+In certain scenarios, it can be useful to set a time in a non local timezone that you want to check against in realtime. For this we can create a date, while targeting specific timezones which in turn will return the correct UTC timestamp
+```js
+//Create a date for a specific timezone, without worrying about its DST, etc
+const TargetTime = ArcDate.target('America/Toronto', (new ArcDate).setUTCHours(9, 30));
+
+//TargetTime will now have the correct internal UTC timestamp, for whenever the target time is in the specific timezone
+if(Date.now() > TargetTime.getTime()) { 
+    //Is right now UTC greater than the time we targeted in a non local timezone?
+}
 ```
 
 ## API
@@ -437,4 +455,4 @@ Currently only a single zone is supported for automatic adjustment for DST. This
 
 There are 15 other "zones" that have different DST days/rules which are not currently supported (in which case, standard adjustment will occur but the +/- hour will not).
 
-For non DST timezones, format will adjust correctly as expected.
+For non DST timezones, format will adjust correctly as expected. The goal is eventually to support all zones, but in the meantime if somebody needs zone support sooner please ask or submit a PR.

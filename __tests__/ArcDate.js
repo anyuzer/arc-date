@@ -88,6 +88,14 @@ describe('ArcDate',()=>{
         expect(TestDate.getTime()).not.toBe(TargetDate.getTime());
     });
 
+    it('should return a date that matches the target constructor and timezone from a number', () => {
+        const TargetDate = Date.UTC(2019, 0, 23);
+        let TestDate = ArcDate.target('America/Toronto', TargetDate);
+
+        expect(TestDate.format('Y-m-d h:i A')).toBe((new ArcDate(TargetDate)).format('Y-m-d h:i A'));
+        expect(TestDate.getTime()).not.toBe((new ArcDate(TargetDate)).getTime());
+    });
+
     it('should throw a TypeError if wrapping a non date',()=>{
         expect(()=>{
             ArcDate.wrap('FAIL');

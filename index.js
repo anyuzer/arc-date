@@ -185,6 +185,9 @@ class ArcDate extends Date {
     }
 
     static target(_tzString, _UTCDate) {
+        if(is(_UTCDate) === 'number'){
+            _UTCDate = new Date(_UTCDate);
+        }
         const localTargets = [_UTCDate.getUTCFullYear(), _UTCDate.getUTCMonth()+1, _UTCDate.getUTCDate(), _UTCDate.getUTCHours()];
         const startTime = _UTCDate.getTime()-(13*60*60*1000); //Remove 13 hours off of our time
 

@@ -101,5 +101,4 @@ describe('ArcDate',()=>{
             ArcDate.wrap('FAIL');
         }).toThrow();
     });
-
 });

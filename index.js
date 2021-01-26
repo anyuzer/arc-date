@@ -180,6 +180,14 @@ class ArcDate extends Date {
         return this;
     }
 
+    getMSInMonth() {
+        return formatFunctions.getMSInThisMonth(this);
+    }
+
+    getMSPassedInYear() {
+        return formatFunctions.getMSPassedThisYear(this);
+    }
+
     toString(){
         return '[object '+this.constructor.name+']';
     }

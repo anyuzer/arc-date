@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/anyuzer/arc-date#readme",
   "devDependencies": {
-    "jest": "^24.8.0"
+    "jest": "^27.5.1"
   },
   "dependencies": {
-    "arc-is": "^1.0.5"
+    "arc-is": "^1.0.8"
   }
 }

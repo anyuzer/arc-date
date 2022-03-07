@@ -1,9 +1,10 @@
-# arc-date [![Build Status](https://travis-ci.org/anyuzer/arc-date.svg?branch=master)](https://travis-ci.org/anyuzer/arc-date)
+# arc-date
 A Date convenience subclass for javascript (ES6)
 
-## Install
+## Install & Test
 ```
 $ npm install arc-date --save
+$ npm run test
 ```
 
 ## Features
@@ -399,6 +400,7 @@ X - Time: 000-999 (milliseconds)
   "Europe/Warsaw": [1,2],
   "Europe/Zaporozhye": [2,3],
   "Europe/Zurich": [1,2],
+  "Factory": [0,0],
   "Indian/Chagos": [6,6],
   "Indian/Christmas": [7,7],
   "Indian/Cocos": [6.5,6.5],
@@ -443,11 +445,6 @@ X - Time: 000-999 (milliseconds)
   "Pacific/Tongatapu": [13,14],
   "Pacific/Wake": [12,12],
   "Pacific/Wallis": [12,12]
-```
-
-## Testing
-```
-npm test
 ```
 
 ## _NOTE on DST_:

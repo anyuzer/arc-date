@@ -1,6 +1,6 @@
 {
   "name": "arc-date",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "description": "Date convenience subclass",
   "main": "index.js",
   "type": "module",

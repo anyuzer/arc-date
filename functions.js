@@ -154,7 +154,9 @@ function getMSInThisMonth(_DateObj){
     return (mEnd-mStart);
 }
 
-module.exports = {
+
+
+export default {
     d, D, j, l, N, S, w, z, W, F, m, M, n, t, L, Y, y, a, A, g, G, h, H, i, s, x, X,
     getMSPassedThisYear, getMSInThisMonth
 };

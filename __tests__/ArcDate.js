@@ -1,5 +1,5 @@
-const ArcDate = require('../index');
-const is = require('arc-is');
+import is from 'arc-is';
+import ArcDate from "../index.js";
 
 describe('ArcDate',()=>{
     let TestDate = new ArcDate(Date.UTC(1981,7,25,0,0,0,0));

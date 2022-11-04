@@ -1,6 +1,6 @@
-const is = require('arc-is')
-const formatFunctions = require('./functions');
-const timezones = require('./timezones.json');
+import is from 'arc-is';
+import functions from "./functions.js";
+import timezones from './timezones.js';
 
 const isDaylight = (_targetDate, _zone, _standardOffset, _daylightOffset) => {
     //Not relevant, no actual DST change
@@ -67,8 +67,8 @@ class ArcDate extends Date {
         }
         let formattedDate = '';
         for(let charCount=0;charCount<_formatString.length;charCount++){
-            if(is(formatFunctions[_formatString.charAt(charCount)]) === 'function'){
-                formattedDate += String(formatFunctions[_formatString.charAt(charCount)](date));
+            if(is(functions[_formatString.charAt(charCount)]) === 'function'){
+                formattedDate += String(functions[_formatString.charAt(charCount)](date));
             }
             else{
                 formattedDate += _formatString.charAt(charCount);
@@ -81,8 +81,8 @@ class ArcDate extends Date {
         const localizedDate = new Date(this.getTime()-(this.getTimezoneOffset()*60*1000));
         let formattedDate = '';
         for(let charCount=0;charCount<_formatString.length;charCount++){
-            if(is(formatFunctions[_formatString.charAt(charCount)]) === 'function'){
-                formattedDate += String(formatFunctions[_formatString.charAt(charCount)](localizedDate));
+            if(is(functions[_formatString.charAt(charCount)]) === 'function'){
+                formattedDate += String(functions[_formatString.charAt(charCount)](localizedDate));
             }
             else{
                 formattedDate += _formatString.charAt(charCount);
@@ -181,11 +181,11 @@ class ArcDate extends Date {
     }
 
     getMSInMonth() {
-        return formatFunctions.getMSInThisMonth(this);
+        return functions.getMSInThisMonth(this);
     }
 
     getMSPassedInYear() {
-        return formatFunctions.getMSPassedThisYear(this);
+        return functions.getMSPassedThisYear(this);
     }
 
     toString(){
@@ -236,4 +236,4 @@ class ArcDate extends Date {
     }
 }
 
-module.exports = ArcDate;
+export default ArcDate;

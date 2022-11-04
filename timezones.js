@@ -1,4 +1,4 @@
-{
+export default {
   "Africa/Abidjan": [0, 0],
   "Africa/Accra": [0, 0],
   "Africa/Algiers": [1, 1],

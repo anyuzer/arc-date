@@ -53,8 +53,9 @@ const isDaylight = (_targetDate, _zone, _standardOffset, _daylightOffset) => {
 const hour = 60*60*1000;
 
 class ArcDate extends Date {
+    #tzString;
     format(_formatString, _timezone){
-        _timezone = _timezone || this.tzString;
+        _timezone = _timezone || this.#tzString;
         let date = new Date(this.getTime());
         if(timezones[_timezone]){
             const [standard, daylight, zone] = timezones[_timezone];
@@ -92,92 +93,17 @@ class ArcDate extends Date {
     }
 
     setTZ(_tzString){
-        this.tzString = _tzString;
+        this.#tzString = _tzString;
         return this;
     }
 
     // Overrides
     getTimezoneOffset() {
-        if(!this.tzString){
+        if(!this.#tzString){
             return super.getTimezoneOffset();
         }
-        const [standard, daylight, zone] = timezones[this.tzString];
+        const [standard, daylight, zone] = timezones[this.#tzString];
         return (~(isDaylight(this, zone, standard, daylight) ? daylight*60 : standard*60)+1);
-    }
-
-    setDate(_dayValue){
-        super.setDate.apply(this, arguments);
-        return this;
-    }
-
-    setFullYear(_yearValue, _monthValue, _dateValue){
-        super.setFullYear.apply(this, arguments);
-        return this;
-    }
-
-    setHours(_hoursValue, _minutesValue, _secondsValue, _msValue){
-        super.setHours.apply(this, arguments);
-        return this;
-    }
-
-    setMilliseconds(_msValue){
-        super.setMilliseconds.apply(this, arguments);
-        return this;
-    }
-
-    setMinutes(_minutesValue, _secondsValue, _msValue){
-        super.setMinutes.apply(this, arguments);
-        return this;
-    }
-
-    setMonth(_monthValue, _dayValue){
-        super.setMonth.apply(this, arguments);
-        return this;
-    }
-
-    setSeconds(_secondsValue, _msValue){
-        super.setSeconds.apply(this, arguments);
-        return this;
-    }
-
-    setTime(_timeValue){
-        super.setTime.apply(this, arguments);
-        return this;
-    }
-
-    setUTCDate(_dayValue){
-        super.setUTCDate.apply(this, arguments);
-        return this;
-    }
-
-    setUTCFullYear(_yearValue, _monthValue, _dateValue){
-        super.setUTCFullYear.apply(this, arguments);
-        return this;
-    }
-
-    setUTCHours(_hoursValue, _minutesValue, _secondsValue, _msValue){
-        super.setUTCHours.apply(this, arguments);
-        return this;
-    }
-
-    setUTCMilliseconds(_msValue){
-        super.setUTCMilliseconds.apply(this, arguments);
-        return this;
-    }
-
-    setUTCMinutes(_minutesValue, _secondsValue, _msValue){
-        super.setUTCMinutes.apply(this, arguments);
-        return this;
-    }
-
-    setUTCMonth(_monthValue, _dayValue){
-        super.setUTCMonth.apply(this, arguments);
-        return this;
-    }
-
-    setUTCSeconds(_secondsValue, _msValue){
-        super.setUTCSeconds.apply(this, arguments);
-        return this;
     }
 
     getMSInMonth() {

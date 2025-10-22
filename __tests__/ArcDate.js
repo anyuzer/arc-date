@@ -1,5 +1,6 @@
 import is from 'arc-is';
 import ArcDate from "../index.js";
+import functions from "../functions.js";
 
 describe('ArcDate',()=>{
     let TestDate = new ArcDate(Date.UTC(1981,7,25,0,0,0,0));
@@ -81,7 +82,8 @@ describe('ArcDate',()=>{
     });
 
     it('should return a date that matches the target constructor and timezone', () => {
-        const TargetDate = (new ArcDate).setUTCHours(9, 30);
+        const TargetDate = (new ArcDate);
+        TargetDate.setUTCHours(9, 30);
         let TestDate = ArcDate.target('America/Toronto', TargetDate);
 
         expect(TestDate.format('Y-m-d h:i A')).toBe(TargetDate.format('Y-m-d h:i A'));
@@ -95,6 +97,20 @@ describe('ArcDate',()=>{
         expect(TestDate.format('Y-m-d h:i A')).toBe((new ArcDate(TargetDate)).format('Y-m-d h:i A'));
         expect(TestDate.getTime()).not.toBe((new ArcDate(TargetDate)).getTime());
     });
+
+    it('should properly get me milliseconds in the month the date is seto to',()=>{
+        const TargetDate = new ArcDate('1972-12-25');
+        expect(TargetDate.getMSInMonth()).toBe(2678400000);
+    });
+
+    it('should properly get me milliseconds that have passed in the current year the date pointer is on',()=>{
+        const TargetDate = new ArcDate('1972-01-01');
+        expect(TargetDate.getMSPassedInYear()).toBe(0);
+
+        const TargetDate2 = new ArcDate('1972-01-02');
+        expect(TargetDate2.getMSPassedInYear()).toBe(86400*1000);
+    });
+
 
     it('should throw a TypeError if wrapping a non date',()=>{
         expect(()=>{

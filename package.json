@@ -3,6 +3,7 @@
   "version": "3.0.0",
   "description": "Date convenience subclass",
   "main": "index.js",
+  "types": "index.d.ts",
   "type": "module",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
@@ -23,9 +24,9 @@
   },
   "homepage": "https://github.com/anyuzer/arc-date#readme",
   "dependencies": {
-    "arc-is": "^2.0.0"
+    "arc-is": "^2.1.0"
   },
   "devDependencies": {
-    "jest": "^29.2.2"
+    "jest": "^30.2.0"
   }
 }
